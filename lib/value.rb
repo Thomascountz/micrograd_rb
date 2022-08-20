@@ -59,7 +59,7 @@ class Value
       children: [self]
     )
     out.backward = -> {
-      self.gradient += out.gradient * out.gradient
+      self.gradient += out.data * out.gradient
     }
     out
   end
