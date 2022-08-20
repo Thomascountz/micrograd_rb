@@ -106,4 +106,31 @@ RSpec.describe Value do
       expect(a.gradient).to be_within(0.0001).of(0.5)
     end
   end
+
+  describe "topological sort" do
+    it "returns a list of Values in topological order" do
+      a = Value.new(data: 1)
+      b = Value.new(data: 1)
+      c = a + b
+      d = Value.new(data: 1)
+      e = c + d
+      expect(e.topological_sort).to eq [a, b, c, d, e]
+    end
+  end
+
+  describe "backpropagate" do
+    it "calls the backward function of each Values in reverse topological order" do
+      a = Value.new(data: 1)
+      b = Value.new(data: 1)
+      c = a + b
+      d = Value.new(data: 1)
+      e = c + d
+      e.gradient = 1.0
+      expect(d.backward).to receive(:call).ordered
+      expect(c.backward).to receive(:call).ordered
+      expect(b.backward).to receive(:call).ordered
+      expect(a.backward).to receive(:call).ordered
+      e.backpropagate 
+    end
+  end
 end

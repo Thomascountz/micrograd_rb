@@ -52,6 +52,24 @@ class Value
     out
   end
 
+  def backpropagate
+    topological_sort.reverse_each do |value|
+      value.backward.call
+    end
+  end
+
+  # Recursively traverse each child before adding the parent to the sorted list
+  def topological_sort(visited = [], sorted = [])
+    if !visited.include?(self)
+      visited << self
+      children.each do |child|
+        child.topological_sort(visited, sorted)
+      end
+      sorted << self
+    end
+    sorted
+  end
+
   def to_s
     "<Value(#{label}: #{@data})>"
   end
