@@ -114,6 +114,6 @@ class Value
   end
 
   def to_s
-    "<Value(#{label}: #{@data})>"
+    "<Value(#{label}: #{sprintf("%0.04f", data)})>"
   end
 end

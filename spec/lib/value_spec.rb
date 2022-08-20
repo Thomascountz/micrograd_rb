@@ -14,7 +14,7 @@ RSpec.describe Value do
   end
 
   it "prints nicely" do
-    expect(Value.new(data: 1, label: :a).to_s).to eq "<Value(a: 1)>"
+    expect(Value.new(data: 1, label: :a).to_s).to eq "<Value(a: 1.0000)>"
   end
 
   describe "+" do
