@@ -28,7 +28,7 @@ module Mermaid
     end
 
     def self.trace(root, nodes = [], edges = [])
-      raise "Missing label for node: #{root}" unless root.label
+      root.label = root.object_id.to_s if root.label.nil?
       if !nodes.include?(root)
         nodes << root
         root.children.each do |child|
@@ -63,6 +63,10 @@ module Mermaid
         "mul"
       when :tanh
         "tanh"
+      when :exp
+        "exp"
+      when ->(op) { op.to_s.start_with?("**") }
+        "pow"
       else
         raise "Unknown operation: #{operation}"
       end
