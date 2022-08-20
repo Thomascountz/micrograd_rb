@@ -9,6 +9,10 @@ RSpec.describe Value do
     expect(Value.new(data: 1, label: :foo).label).to eq :foo
   end
 
+  it "has a gradient" do
+    expect(Value.new(data: 1, gradient: 5.1).gradient).to eq 5.1
+  end
+
   it "prints nicely" do
     expect(Value.new(data: 1, label: :a).to_s).to eq "<Value(a: 1)>"
   end
@@ -55,6 +59,23 @@ RSpec.describe Value do
       b = Value.new(data: 1)
       result_value = a * b
       expect(result_value.children).to eq [a, b]
+    end
+  end
+
+  describe "tanh" do
+    it "returns a Value object whose data is the tanh of the operand" do
+      a = Value.new(data: 1)
+      expect(a.tanh.data).to eq Math.tanh(1)
+    end
+
+    it "returns a Value object whose result operation is :tanh" do
+      a = Value.new(data: 1)
+      expect(a.tanh.operation).to eq :tanh
+    end
+
+    it "returns a Value object whose children is the operand Value" do
+      a = Value.new(data: 1)
+      expect(a.tanh.children).to eq [a]
     end
   end
 end
