@@ -130,7 +130,27 @@ RSpec.describe Value do
       expect(c.backward).to receive(:call).ordered
       expect(b.backward).to receive(:call).ordered
       expect(a.backward).to receive(:call).ordered
-      e.backpropagate 
+      e.backpropagate
+    end
+
+    it "allows gradients to accumulate when the same Value is used in an operation" do
+      a = Value.new(data: 1)
+      b = a + a
+      b.gradient = 1.0
+      b.backpropagate
+      expect(a.gradient).to eq 2.0
+    end
+
+    it "allows gradients to accumulate when the same Value is used in a multiple operations" do
+      a = Value.new(data: 2)
+      b = Value.new(data: 1)
+      c = a * b
+      d = a * b
+      e = c * d
+      e.gradient = 1.0
+      e.backpropagate
+      expect(a.gradient).to eq 4.0
+      expect(b.gradient).to eq 8.0
     end
   end
 end

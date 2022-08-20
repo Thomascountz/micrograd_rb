@@ -18,8 +18,8 @@ class Value
       children: [self, other]
     )
     backward = -> {
-      self.gradient = 1.0 * out.gradient
-      other.gradient = 1.0 * out.gradient
+      self.gradient += 1.0 * out.gradient
+      other.gradient += 1.0 * out.gradient
     }
     out.backward = backward
     out
@@ -32,8 +32,8 @@ class Value
       children: [self, other]
     )
     backward = -> {
-      self.gradient = other.data * out.gradient
-      other.gradient = data * out.gradient
+      self.gradient += other.data * out.gradient
+      other.gradient += data * out.gradient
     }
     out.backward = backward
     out
@@ -46,7 +46,7 @@ class Value
       children: [self]
     )
     backward = -> {
-      self.gradient = 1.0 - (out.data**2)
+      self.gradient += 1.0 - (out.data**2)
     }
     out.backward = backward
     out
