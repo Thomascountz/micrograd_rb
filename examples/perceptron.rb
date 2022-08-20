@@ -1,5 +1,5 @@
 require "./lib/value"
-require "./lib/mermaid_graph_html_writer"
+require "./mermaid/graph_html_writer"
 
 # tanh(w1x1 + w2x2 + b)
 x1 = Value.new(data: 2.0, label: :x1)
@@ -44,7 +44,7 @@ x1w1.gradient = x1w1x2w2.gradient
 x2w2.gradient = x1w1x2w2.gradient
 
 # With multiplication, the local gradient of the operands is equal to
-# the value of the other operand, then the chain rule multiplies the 
+# the value of the other operand, then the chain rule multiplies the
 # local gradient of the operand by the gradient of the resultant
 
 # x1 * w1 = x1w1
@@ -55,5 +55,4 @@ w1.gradient = x1w1.gradient * x1.data
 x2.gradient = x2w2.gradient * w2.data
 w2.gradient = x2w2.gradient * x2.data
 
-
-MermaidGraphHTMLWriter.write(o, "perceptron.html")
+Mermaid::GraphHTMLWriter.write(o, "perceptron.html")

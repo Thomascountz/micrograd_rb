@@ -1,17 +1,16 @@
-require_relative "./mermaid_graph"
+require_relative "./graph"
 
-class MermaidGraphHTMLWriter
-  OUT_FILE = "index.html"
+module Mermaid
+  class GraphHTMLWriter
+    OUT_FILE = "index.html"
 
-  def self.write(root, outfile = OUTFILE)
-    graph = MermaidGraph.output(root)
-    File.open(File.join("out", outfile), "w") do |f|
-      f.write(html_string(graph))
+    def self.write(root, outfile = OUTFILE)
+      graph = Mermaid::Graph.output(root)
+      File.write(File.join("out", outfile), html_string(graph))
     end
-  end
 
-  def self.html_string(graph)
-    %{<!DOCTYPE html>
+    def self.html_string(graph)
+      %{<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="utf-8">
@@ -25,5 +24,6 @@ class MermaidGraphHTMLWriter
     </script>
     </body>
     </html>}
+    end
   end
 end
