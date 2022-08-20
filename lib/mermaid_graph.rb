@@ -27,6 +27,7 @@ class MermaidGraph
   end
 
   def self.trace(root, nodes = [], edges = [])
+    raise "Missing label for node: #{root}" unless root.label
     if !nodes.include?(root)
       nodes << root
       root.children.each do |child|
@@ -58,6 +59,8 @@ class MermaidGraph
       "plus"
     elsif operation == :*
       "mul"
+    else
+      raise "Unknown operation: #{operation}"
     end
   end
 end
