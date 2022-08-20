@@ -1,8 +1,11 @@
 # micrograd_rb
 
-Reimplementation of [karpathy/micrograd](https://github.com/karpathy/micrograd) in Ruby for pedagogical purposes.
+Reimplementation of [karpathy/micrograd](https://github.com/karpathy/micrograd) in Ruby **WITH TESTS**! 
 
-Follow along with karpathy's video here: https://www.youtube.com/watch?v=VMj-3S1tku0
+> **Warning**
+> For pedagogical purposes only.
+
+Follow along with [karpathy](https://github.com/karpathy)'s video here: https://www.youtube.com/watch?v=VMj-3S1tku0
 
 Here's an example of a backprop of a single perceptron
 
