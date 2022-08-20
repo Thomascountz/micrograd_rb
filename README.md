@@ -1,13 +1,10 @@
 # micrograd_rb
 
-Reimplementation of [karpathy/micrograd](https://github.com/karpathy/micrograd) in Ruby **WITH TESTS**! 
-
-> **Warning**
-> For pedagogical purposes only.
+Reimplementation of the scalar-value backpropagation library, [karpathy/micrograd](https://github.com/karpathy/micrograd), but in Ruby and **WITH TESTS**! 
 
 Follow along with [karpathy](https://github.com/karpathy)'s video here: https://www.youtube.com/watch?v=VMj-3S1tku0
 
-Here's an example of a backprop of a single perceptron
+Here's an example of a backprop on a single perceptron found in [/examples/perceptron_auto_backprop.rb](./examples/perceptron_auto_backprop.rb):
 
 ```mermaid
 graph LR
@@ -41,3 +38,6 @@ graph LR
   W2 --> X2W2mul
   B --> Nplus
 ```
+
+> **Warning**
+> Like [karpathy](https://github.com/karpathy)'s, this is for pedagogical purposes only.
