@@ -9,3 +9,7 @@ end
 group :test do
   gem "rspec", "~> 3.11"
 end
+
+group :development, :test do
+  gem "pry", "~> 0.14.1"
+end
