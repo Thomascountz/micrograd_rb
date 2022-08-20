@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+    </head>
+    <body style="font-family:monospace">
+      <div class="mermaid">
+        graph LR
+O["O | grad:1.0000 | data:0.7071"]
+Omul(("*"))
+Omul --> O
+60["60 | grad:0.1464 | data:4.8284"]
+60plus(("+"))
+60plus --> 60
+E["E | grad:0.0429 | data:5.8284"]
+Eexp(("exp"))
+Eexp --> E
+80["80 | grad:0.2500 | data:1.7627"]
+80mul(("*"))
+80mul --> 80
+N["N | grad:0.5000 | data:0.8814"]
+Nplus(("+"))
+Nplus --> N
+X1W1X2W2["X1W1X2W2 | grad:0.5000 | data:-6.0000"]
+X1W1X2W2plus(("+"))
+X1W1X2W2plus --> X1W1X2W2
+X1W1["X1W1 | grad:0.5000 | data:-6.0000"]
+X1W1mul(("*"))
+X1W1mul --> X1W1
+X1["X1 | grad:-1.5000 | data:2.0000"]
+W1["W1 | grad:1.0000 | data:-3.0000"]
+X2W2["X2W2 | grad:0.5000 | data:0.0000"]
+X2W2mul(("*"))
+X2W2mul --> X2W2
+X2["X2 | grad:0.5000 | data:0.0000"]
+W2["W2 | grad:0.0000 | data:1.0000"]
+B["B | grad:0.5000 | data:6.8814"]
+100["100 | grad:0.2203 | data:2.0000"]
+120["120 | grad:0.1464 | data:-1.0000"]
+140["140 | grad:4.8284 | data:0.1464"]
+140pow(("**-1"))
+140pow --> 140
+160["160 | grad:-0.1036 | data:6.8284"]
+160plus(("+"))
+160plus --> 160
+180["180 | grad:-0.1036 | data:1.0000"]
+60 --> Omul
+E --> 60plus
+80 --> Eexp
+N --> 80mul
+X1W1X2W2 --> Nplus
+X1W1 --> X1W1X2W2plus
+X1 --> X1W1mul
+W1 --> X1W1mul
+X2W2 --> X1W1X2W2plus
+X2 --> X2W2mul
+W2 --> X2W2mul
+B --> Nplus
+100 --> 80mul
+120 --> 60plus
+140 --> Omul
+160 --> 140pow
+E --> 160plus
+180 --> 160plus
+
+      </div>
+     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+     <script>mermaid.initialize({startOnLoad:true, fontFamily: 'monospace'});</script>
+    </script>
+    </body>
+    </html>
