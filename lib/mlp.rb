@@ -11,6 +11,10 @@ class MLP
     end
   end
 
+  def parameters
+    layers.map(&:parameters).flatten
+  end
+
   def call(inputs:)
     raise ArgumentError.new("MLP expects #{@input_size} inputs. Got #{inputs.size}.") unless inputs.size == @input_size
     @layers.each do |layer|

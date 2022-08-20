@@ -11,6 +11,13 @@ RSpec.describe Neuron do
     expect(neuron.bias.data).to be_between(-1, 1)
   end
 
+  describe "#parameters" do
+    it "returns the weights and bias" do
+      neuron = Neuron.new(size: 2)
+      expect(neuron.parameters).to eq([neuron.weights, neuron.bias].flatten)
+    end
+  end
+
   describe "#call" do
     it "returns the activation of the neuron" do
       neuron = Neuron.new(size: 2)

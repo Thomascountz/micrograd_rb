@@ -12,6 +12,13 @@ RSpec.describe MLP do
     expect(mlp.layers[2].output_size).to eq(1)
   end
 
+  describe "#parameters" do
+    it "returns the parameters of all layers" do
+      mlp = MLP.new(layer_sizes: [3, 4, 4, 1])
+      expect(mlp.parameters).to eq(mlp.layers.map(&:parameters).flatten)
+    end
+  end
+
   describe "#call" do
     it "returns the value of the final layer" do
       mlp = MLP.new(layer_sizes: [3, 4, 4, 1])

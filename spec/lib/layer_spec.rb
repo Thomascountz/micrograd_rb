@@ -7,6 +7,13 @@ RSpec.describe Layer do
     expect(layer.neurons.all? { |n| n.weights.length == 2 }).to be_truthy
   end
 
+  describe "#parameters" do
+    it "returns the weights and bias of all neurons" do
+      layer = Layer.new(input_size: 2, output_size: 3)
+      expect(layer.parameters).to eq(layer.neurons.map(&:parameters).flatten)
+    end
+  end
+
   describe "#call" do
     it "returns the activation of the layer" do
       layer = Layer.new(input_size: 2, output_size: 3)

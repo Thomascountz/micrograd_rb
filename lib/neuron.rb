@@ -7,6 +7,10 @@ class Neuron
     @bias = Value.new(data: rand(-1..1))
   end
 
+  def parameters
+    [weights, bias].flatten
+  end
+
   def call(inputs:)
     raise ArgumentError.new("Neuron expects #{weights.size} inputs. Got #{inputs.size}.") unless inputs.size == weights.size
     activation = inputs.zip(weights).map { |xi, wi| xi * wi }.sum(bias)
