@@ -18,11 +18,10 @@ class Value
       operation: :+,
       children: [self, other]
     )
-    backward = -> {
+    out.backward = -> {
       self.gradient += 1.0 * out.gradient
       other.gradient += 1.0 * out.gradient
     }
-    out.backward = backward
     out
   end
 
@@ -33,11 +32,35 @@ class Value
       operation: :*,
       children: [self, other]
     )
-    backward = -> {
+    out.backward = -> {
       self.gradient += other.data * out.gradient
       other.gradient += data * out.gradient
     }
-    out.backward = backward
+    out
+  end
+
+  def **(other)
+    raise "Only implemented for scalar values" unless other.is_a?(Numeric)
+    out = Value.new(
+      data: data**other,
+      operation: :"**#{other}",
+      children: [self]
+    )
+    out.backward = -> {
+      self.gradient += other * (data**(other - 1)) * out.gradient
+    }
+    out
+  end
+
+  def exp
+    out = Value.new(
+      data: Math.exp(data),
+      operation: :exp,
+      children: [self]
+    )
+    out.backward = -> {
+      self.gradient += out.gradient * out.gradient
+    }
     out
   end
 
@@ -47,11 +70,22 @@ class Value
       operation: :tanh,
       children: [self]
     )
-    backward = -> {
+    out.backward = -> {
       self.gradient += 1.0 - (out.data**2)
     }
-    out.backward = backward
     out
+  end
+
+  def -@
+    self * -1
+  end
+
+  def -(other)
+    self + -other
+  end
+
+  def /(other)
+    self * (other**-1)
   end
 
   def backpropagate

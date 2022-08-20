@@ -58,7 +58,7 @@ RSpec.describe Value do
   end
 
   describe "*" do
-    it "returns a Value object whose data is the sum of the operand Values" do
+    it "returns a Value object whose data is the mutiplication of the operand Values" do
       a = Value.new(data: 1)
       b = Value.new(data: 2)
       expect((a * b).data).to eq 2
@@ -95,6 +95,61 @@ RSpec.describe Value do
     end
   end
 
+  describe "**" do
+    it "returns a Value object whose data is the raising of one operand by the other" do
+      a = Value.new(data: 2)
+      expect((a**2).data).to eq 4.0
+    end
+
+    it "returns a Value object whose result operation is :**<other>" do
+      a = Value.new(data: 2)
+      result_value = a**2
+      expect(result_value.operation).to eq :"**2"
+    end
+
+    it "returns a Value object whose children are the operand Value" do
+      a = Value.new(data: 1)
+      result_value = a**2
+      expect(result_value.children).to eq [a]
+    end
+
+    it "returns a Value whose backward is a proc to set the derivative of its children according to the chain rule" do
+      a = Value.new(data: 2)
+      result_value = a**2
+      result_value.gradient = 12.0
+      result_value.backward.call
+      expect(a.gradient).to eq 48.0
+    end
+  end
+
+  describe "exp" do
+    it "returns a Value object whose data is the natural exponetiation of the operand Value" do
+      a = Value.new(data: 2)
+      result_value = a.exp
+      expect(result_value.data).to be_within(0.001).of(7.389)
+    end
+
+    it "returns a Value object whose result operation is :exp" do
+      a = Value.new(data: 2)
+      result_value = a.exp
+      expect(result_value.operation).to eq :exp
+    end
+
+    it "returns a Value object whose children is the operand Value" do
+      a = Value.new(data: 2)
+      result_value = a.exp
+      expect(result_value.children).to eq [a]
+    end
+
+    it "returns a Value whose backward is a proc to set the derivative of its children according to the chain rule" do
+      a = Value.new(data: 2)
+      result_value = a.exp
+      result_value.gradient = 2.0
+      result_value.backward.call
+      expect(a.gradient).to eq 4.0
+    end
+  end
+
   describe "tanh" do
     it "returns a Value object whose data is the tanh of the operand" do
       a = Value.new(data: 1)
@@ -117,6 +172,59 @@ RSpec.describe Value do
       result_value.gradient = 1.0
       result_value.backward.call
       expect(a.gradient).to be_within(0.0001).of(0.5)
+    end
+  end
+
+  describe "@-" do
+    it "returns a Value object whose data is the negation of data in the operand Value" do
+      a = Value.new(data: 1)
+      result_value = -a
+      expect(result_value.data).to eq(-1)
+    end
+
+    it "returns a Value whose backward is a proc to set the derivative of its children according to the chain rule" do
+      a = Value.new(data: 1)
+      result_value = -a
+      result_value.gradient = 1.0
+      result_value.backward.call
+      expect(a.gradient).to eq(-1.0)
+    end
+  end
+
+  describe "-" do
+    it "returns a Value object whose data is the negation of data in the operand Value" do
+      a = Value.new(data: 2)
+      b = Value.new(data: 1)
+      result_value = a - b
+      expect(result_value.data).to eq(1)
+    end
+
+    it "returns a Value whose backward is a proc to set the derivative of its children according to the chain rule" do
+      a = Value.new(data: 1)
+      b = Value.new(data: 1)
+      result_value = a + b
+      result_value.gradient = 1.0
+      result_value.backward.call
+      expect(a.gradient).to eq 1.0
+      expect(b.gradient).to eq 1.0
+    end
+  end
+
+  describe "/" do
+    it "returns a Value object whose data is the division of the operand Values" do
+      a = Value.new(data: 1)
+      b = Value.new(data: 2)
+      expect((a / b).data).to eq 0.5
+    end
+
+    it "returns a Value whose backward is a proc to set the derivative of its children according to the chain rule" do
+      a = Value.new(data: 3)
+      b = Value.new(data: 2)
+      result_value = a / b
+      result_value.gradient = 3.0
+      result_value.backward.call
+      expect(a.gradient).to eq 1.5
+      expect(b.gradient).to eq 0.0
     end
   end
 
