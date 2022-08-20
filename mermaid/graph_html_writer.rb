@@ -15,12 +15,12 @@ module Mermaid
     <head>
       <meta charset="utf-8">
     </head>
-    <body style="font-family:monospace">
+    <body>
       <div class="mermaid">
         #{graph}
       </div>
      <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-     <script>mermaid.initialize({startOnLoad:true, fontFamily: 'monospace'});</script>
+     <script>mermaid.initialize({startOnLoad:true, fontFamily:'monospace', theme:'default'});</script>
     </script>
     </body>
     </html>}
