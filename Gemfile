@@ -12,4 +12,6 @@ end
 
 group :development, :test do
   gem "pry", "~> 0.14.1"
+  gem "pry-nav", "~> 1.0"
 end
+
