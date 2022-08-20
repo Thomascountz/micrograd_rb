@@ -55,6 +55,6 @@ w1.gradient = x1w1.gradient * x1.data
 x2.gradient = x2w2.gradient * w2.data
 w2.gradient = x2w2.gradient * x2.data
 
-# Use the Mermaid::GraphHTMLWriter to write the mermaid graph to an 
+# Use the Mermaid::GraphHTMLWriter to write the mermaid graph to an
 # html file that we can open in the browswer
 Mermaid::GraphHTMLWriter.write(o, "perceptron_manual_backprop.html")

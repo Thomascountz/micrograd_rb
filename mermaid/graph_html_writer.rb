@@ -4,7 +4,7 @@ module Mermaid
   class GraphHTMLWriter
     OUT_FILE = "index.html"
 
-    def self.write(root, outfile = OUTFILE)
+    def self.write(root, outfile = OUT_FILE)
       graph = Mermaid::Graph.output(root)
       File.write(File.join("out", outfile), html_string(graph))
     end
