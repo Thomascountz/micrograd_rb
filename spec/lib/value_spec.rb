@@ -55,6 +55,13 @@ RSpec.describe Value do
       result_value = a + b
       expect(result_value.data).to eq 2
     end
+
+    it "can be coerced into a Numeric" do
+      a = 1
+      b = Value.new(data: 1)
+      result_value = a + b
+      expect(result_value.data).to eq 2
+    end
   end
 
   describe "*" do
@@ -93,6 +100,13 @@ RSpec.describe Value do
       b = 2
       expect((a * b).data).to eq 2
     end
+
+    it "can be coerced into a Numeric" do
+      a = 2
+      b = Value.new(data: 1)
+      result_value = a * b
+      expect(result_value.data).to eq 2
+    end
   end
 
   describe "**" do
@@ -119,6 +133,11 @@ RSpec.describe Value do
       result_value.gradient = 12.0
       result_value.backward.call
       expect(a.gradient).to eq 48.0
+    end
+
+    it "the exponent must be Numberic" do
+      a = Value.new(data: 2)
+      expect { a**"2" }.to raise_error(ArgumentError)
     end
   end
 

@@ -11,6 +11,13 @@ class Value
     @backward = -> {} # default is no-op, e.g. for leaf nodes
   end
 
+  # Coerce is called when calling an operation on a Numeric
+  # e.g. 4 + Value.new(data: 2) => <Value(: 6)>
+  # see: https://stackoverflow.com/questions/2799571/in-ruby-how-does-coerce-actually-work
+  def coerce(other)
+    [self, other]
+  end
+
   def +(other)
     other = Value.new(data: other) unless other.is_a?(Value)
     out = Value.new(
@@ -40,7 +47,7 @@ class Value
   end
 
   def **(other)
-    raise "Only implemented for scalar values" unless other.is_a?(Numeric)
+    raise ArgumentError.new("Only implemented for scalar values") unless other.is_a?(Numeric)
     out = Value.new(
       data: data**other,
       operation: :"**#{other}",
