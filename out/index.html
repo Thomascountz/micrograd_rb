@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+    </head>
+    <body>
+      <div class="mermaid">
+        graph LR
+K["K | (GRAD) | 3067.000"]
+Kplus(("+"))
+Kplus --> K
+I["I | (GRAD) | 3066.000"]
+Imul(("*"))
+Imul --> I
+G["G | (GRAD) | 219.000"]
+Gplus(("+"))
+Gplus --> G
+E["E | (GRAD) | 120.000"]
+Emul(("*"))
+Emul --> E
+C["C | (GRAD) | 4.000"]
+Cplus(("+"))
+Cplus --> C
+A["A | (GRAD) | 3.000"]
+B["B | (GRAD) | 1.000"]
+D["D | (GRAD) | 30.000"]
+F["F | (GRAD) | 99.000"]
+H["H | (GRAD) | 14.000"]
+J["J | (GRAD) | 1.000"]
+I --> Kplus
+G --> Imul
+E --> Gplus
+C --> Emul
+A --> Cplus
+B --> Cplus
+D --> Emul
+F --> Gplus
+H --> Imul
+J --> Kplus
+
+      </div>
+     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+     <script>mermaid.initialize({startOnLoad:true});
+    </script>
+    </body>
+    </html>
