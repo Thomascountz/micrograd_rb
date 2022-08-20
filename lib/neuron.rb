@@ -3,8 +3,8 @@ require "./lib/value"
 class Neuron
   attr_reader :weights, :bias
   def initialize(size:)
-    @weights = Array.new(size) { Value.new(data: rand(-1..1)) }
-    @bias = Value.new(data: rand(-1..1))
+    @weights = Array.new(size) { Value.new(data: rand(-1.0..1.0)) }
+    @bias = Value.new(data: rand(-1.0..1.0))
   end
 
   def parameters
