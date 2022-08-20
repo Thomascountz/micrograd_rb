@@ -48,6 +48,13 @@ RSpec.describe Value do
       expect(a.gradient).to eq 1.0
       expect(b.gradient).to eq 1.0
     end
+
+    it "accepts a non-Value operand" do
+      a = Value.new(data: 1)
+      b = 1
+      result_value = a + b
+      expect(result_value.data).to eq 2
+    end
   end
 
   describe "*" do
@@ -79,6 +86,12 @@ RSpec.describe Value do
       result_value.backward.call
       expect(a.gradient).to eq 4.0
       expect(b.gradient).to eq 2.0
+    end
+
+    it "accepts a non-Value operand" do
+      a = Value.new(data: 1)
+      b = 2
+      expect((a * b).data).to eq 2
     end
   end
 

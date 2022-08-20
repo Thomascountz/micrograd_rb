@@ -12,6 +12,7 @@ class Value
   end
 
   def +(other)
+    other = Value.new(data: other) unless other.is_a?(Value)
     out = Value.new(
       data: data + other.data,
       operation: :+,
@@ -26,6 +27,7 @@ class Value
   end
 
   def *(other)
+    other = Value.new(data: other) unless other.is_a?(Value)
     out = Value.new(
       data: data * other.data,
       operation: :*,
