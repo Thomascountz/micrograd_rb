@@ -39,7 +39,7 @@ class MermaidGraph
   end
 
   def self.node_string(node)
-    "#{node.label.upcase}[\"#{node.label.upcase} | (GRAD) | #{sprintf("%0.03f", node.data)}\"]\n"
+    "#{node.label.upcase}[\"#{node.label.upcase} | grad:#{sprintf("%0.04f", node.gradient)} | data:#{sprintf("%0.04f", node.data)}\"]\n"
   end
 
   def self.operation_node_string(node, operation)
@@ -55,10 +55,13 @@ class MermaidGraph
   end
 
   def self.operation_to_s(operation)
-    if operation == :+
+    case operation
+    when :+
       "plus"
-    elsif operation == :*
+    when :*
       "mul"
+    when :tanh
+      "tanh"
     else
       raise "Unknown operation: #{operation}"
     end
