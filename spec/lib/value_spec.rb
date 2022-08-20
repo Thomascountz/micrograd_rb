@@ -146,7 +146,7 @@ RSpec.describe Value do
       result_value = a.exp
       result_value.gradient = 2.0
       result_value.backward.call
-      expect(a.gradient).to eq 4.0
+      expect(a.gradient).to within(0.0001).of(14.77811)
     end
   end
 
