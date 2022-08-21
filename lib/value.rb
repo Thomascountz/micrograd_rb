@@ -96,6 +96,7 @@ class Value
   end
 
   def backpropagate
+    self.gradient = 1.0 # Gradient of the root node is alwasy 1.0
     topological_sort.reverse_each do |value|
       value.backward.call
     end

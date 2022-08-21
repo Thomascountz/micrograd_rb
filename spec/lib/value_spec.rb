@@ -259,6 +259,12 @@ RSpec.describe Value do
   end
 
   describe "backpropagate" do
+    it "initializes the gradient to 1.0" do
+      a = Value.new(data: 1.0)
+      a.backpropagate
+      expect(a.gradient).to eq 1.0
+    end
+
     it "calls the backward function of each Values in reverse topological order" do
       a = Value.new(data: 1)
       b = Value.new(data: 1)
