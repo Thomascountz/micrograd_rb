@@ -186,11 +186,11 @@ RSpec.describe Value do
     end
 
     it "returns a Value whose backward is a proc to set the derivative of its children according to the chain rule" do
-      a = Value.new(data: 0.8814)
+      a = Value.new(data: 0.5)
       result_value = a.tanh
-      result_value.gradient = 1.0
+      result_value.gradient = 14.0
       result_value.backward.call
-      expect(a.gradient).to be_within(0.0001).of(0.5)
+      expect(a.gradient).to be_within(0.01).of(11.0102682)
     end
   end
 
