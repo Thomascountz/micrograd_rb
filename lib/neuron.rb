@@ -8,7 +8,7 @@ class Neuron
   end
 
   def parameters
-    [weights, bias].flatten
+    weights + [bias]
   end
 
   def call(inputs:)

@@ -17,7 +17,7 @@ class MLP
 
   def call(inputs:)
     raise ArgumentError.new("MLP expects #{@input_size} inputs. Got #{inputs.size}.") unless inputs.size == @input_size
-    @layers.each do |layer|
+    layers.each do |layer|
       inputs = layer.call(inputs: inputs)
     end
     inputs
